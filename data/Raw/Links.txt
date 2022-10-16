@@ -1,0 +1,6 @@
+https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows
+https://www.kaggle.com/datasets/shivamb/netflix-shows
+https://www.kaggle.com/datasets/shivamb/disney-movies-and-tv-shows
+https://www.kaggle.com/datasets/shivamb/amazon-prime-movies-and-tv-shows
+https://www.kaggle.com/datasets/shivamb/hulu-movies-and-tv-shows
+https://www.kaggle.com/datasets/paultimothymooney/latitude-and-longitude-for-every-country-and-state
