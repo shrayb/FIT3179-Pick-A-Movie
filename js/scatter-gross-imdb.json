@@ -1,0 +1,281 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "data/imdb+movie_titles_genre_long.csv"
+    },
+    "params": [{
+        "name": "plat",
+        "select": {"type": "point", "fields": ["Platform"]},
+        "bind": {
+          "input": "select", 
+          "options": [null, "netflix", "hulu", "disney plus", "amazon prime"], 
+          "labels": ["Show All", "Netflix", "Hulu", "Disney Plus", "Amazon Prime"], 
+          "name": "Platform Selection: "}
+      }],
+
+    "vconcat": [
+    {"hconcat": [
+        {
+            "width": 472,
+            "height": 354,
+            "transform": [
+                {"filter": "datum.Gross > 0"},
+                {"filter": "datum.IMDB_Rating > 0"}
+            ],
+            "encoding": {
+                "x":{
+                    "field": "IMDB_Rating",
+                    "type": "quantitative",
+                    "title": "IMDB Rating",
+                    "scale": {"domain": [7.5, 9]},
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15} 
+                },
+                "y": {
+                    "field": "Gross",
+                    "type": "quantitative",
+                    "title": "Gross Profit",
+                    "scale": {"type": "sqrt", "domain": [1, 800000000]},
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15, "format": "$,.3s"} 
+                } 
+            },
+            "layer": [
+                {
+                    "mark": "circle",
+                    "encoding": {
+                        "color": {
+                            "field": "Platform",
+                            "type": "nominal",
+                            "legend": {"labelFontSize": 13, "titleFontSize": 15},
+                            "scale": {
+                                "domain": [
+                                "disney plus",
+                                "hulu",
+                                "netflix",
+                                "amazon prime"
+                                ],
+                                "range": [
+                                "#060c41",
+                                "#37e985",
+                                "#e00018",
+                                "#2da9e0"
+                                ]
+                            }
+                        },
+                        "opacity": {
+                            "condition": {
+                                "param": "plat",
+                                "value": 0.5
+                            },
+                            "value": 0
+                        },
+                        "tooltip": [
+                            {"field": "Title", "type": "nominal"},
+                            {"field": "Platform", "type": "nominal"},
+                            {"field": "Genre", "type": "nominal"},
+                            {"field": "Gross", "type": "quantitative", "format": "$,.5s", "title": "Gross Profit"},
+                            {"field": "IMDB_Rating", "type": "quantitative", "title": "IMDB Rating"},
+                            {"field": "No_of_Votes", "type": "quantitative", "title": "Num of IMDB Votes", "format": ","},   
+                            {"field": "Duration", "type": "quantitative", "title": "Duration (min)", "format": ","}   
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": 472,
+            "height": 354,
+            "transform": [
+                {"filter": "datum.Gross > 0"},
+                {"filter": "datum.No_of_Votes > 0"}
+            ],
+            "encoding": {
+                "x":{
+                    "field": "No_of_Votes",
+                    "type": "quantitative",
+                    "title": "Number of IMDB Votes",
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15, "format": ",.3s"}
+                },
+                "y": {
+                    "field": "Gross",
+                    "type": "quantitative",
+                    "title": "Gross Profit",
+                    "scale": {"type": "sqrt", "domain": [1, 800000000]},
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15, "format": "$,.3s"}
+                } 
+            },
+            "layer": [
+                {
+                    "mark": "circle",
+                    "encoding": {
+                        "color": {
+                            "field": "Platform",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": [
+                                "disney plus",
+                                "hulu",
+                                "netflix",
+                                "amazon prime"
+                                ],
+                                "range": [
+                                "#060c41",
+                                "#37e985",
+                                "#e00018",
+                                "#2da9e0"
+                                ]
+                            }
+                        },
+                        "opacity": {
+                            "condition": {
+                                "param": "plat",
+                                "value": 0.5
+                            },
+                            "value": 0
+                        },
+                        "tooltip": [
+                            {"field": "Title", "type": "nominal"},
+                            {"field": "Platform", "type": "nominal"},
+                            {"field": "Genre", "type": "nominal"},
+                            {"field": "Gross", "type": "quantitative", "format": "$,.5s", "title": "Gross Profit"},
+                            {"field": "IMDB_Rating", "type": "quantitative", "title": "IMDB Rating"},
+                            {"field": "No_of_Votes", "type": "quantitative", "title": "Num of IMDB Votes", "format": ","},               
+                            {"field": "Duration", "type": "quantitative", "title": "Duration (min)", "format": ","}   
+                        ]
+                    }
+                }
+            ]
+        }
+    ]},
+    {"hconcat":[
+        {
+            "width": 472,
+            "height": 354,
+            "transform": [
+                {"filter": "datum.Gross > 0"},
+                {"filter": "datum.Meta_score > 0"}
+            ],
+            "encoding": {
+                "x":{
+                    "field": "Meta_score",
+                    "type": "quantitative",
+                    "title": "IMDB Meta Score",
+                    "scale": {"domain": [25, 100]},
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15}
+                },
+                "y": {
+                    "field": "Gross",
+                    "type": "quantitative",
+                    "title": "Gross Profit",
+                    "scale": {"type": "sqrt", "domain": [1, 800000000]},
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15, "format": "$,.3s"}
+                } 
+            },
+            "layer": [
+                {
+                    "mark": "circle",
+                    "encoding": {
+                        "color": {
+                            "field": "Platform",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": [
+                                "disney plus",
+                                "hulu",
+                                "netflix",
+                                "amazon prime"
+                                ],
+                                "range": [
+                                "#060c41",
+                                "#37e985",
+                                "#e00018",
+                                "#2da9e0"
+                                ]
+                            }
+                        },
+                        "opacity": {
+                            "condition": {
+                                "param": "plat",
+                                "value": 0.5
+                            },
+                            "value": 0
+                        },
+                        "tooltip": [
+                            {"field": "Title", "type": "nominal"},
+                            {"field": "Platform", "type": "nominal"},
+                            {"field": "Genre", "type": "nominal"},
+                            {"field": "Gross", "type": "quantitative", "format": "$,.5s", "title": "Gross Profit"},
+                            {"field": "IMDB_Rating", "type": "quantitative", "title": "IMDB Rating"},
+                            {"field": "No_of_Votes", "type": "quantitative", "title": "Num of IMDB Votes", "format": ","},              
+                            {"field": "Duration", "type": "quantitative", "title": "Duration (min)", "format": ","}   
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": 472,
+            "height": 354,
+            "transform": [
+                {"filter": "datum.Gross > 0"},
+                {"filter": "datum.IMDB_Rating > 0"}
+            ],
+            "encoding": {
+                "x":{
+                    "field": "Duration",
+                    "type": "quantitative",
+                    "title": "Movie Duration (min)",
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15}
+                },
+                "y": {
+                    "field": "Gross",
+                    "type": "quantitative",
+                    "title": "Gross Profit",
+                    "scale": {"type": "sqrt", "domain": [1, 800000000]},
+                    "axis": {"labelFontSize": 13, "titleFontSize": 15, "format": "$,.3s"}
+                } 
+            },
+            "layer": [
+                {
+                    "mark": "circle",
+                    "encoding": {
+                        "color": {
+                            "field": "Platform",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": [
+                                "disney plus",
+                                "hulu",
+                                "netflix",
+                                "amazon prime"
+                                ],
+                                "range": [
+                                "#060c41",
+                                "#37e985",
+                                "#e00018",
+                                "#2da9e0"
+                                ]
+                            }
+                        },
+                        "opacity": {
+                            "condition": {
+                                "param": "plat",
+                                "value": 0.5
+                            },
+                            "value": 0
+                        },
+                        "tooltip": [
+                            {"field": "Title", "type": "nominal"},
+                            {"field": "Platform", "type": "nominal"},
+                            {"field": "Genre", "type": "nominal"},
+                            {"field": "Gross", "type": "quantitative", "format": "$,.5s", "title": "Gross Profit"},
+                            {"field": "IMDB_Rating", "type": "quantitative", "title": "IMDB Rating"},
+                            {"field": "No_of_Votes", "type": "quantitative", "title": "Num of IMDB Votes", "format": ","},  
+                            {"field": "Duration", "type": "quantitative", "title": "Duration (min)", "format": ","}   
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}]
+}

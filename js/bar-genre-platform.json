@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/imdb+movie_titles_genre_long.csv"
+  },
+  "width": 1180,
+  "height": 590,
+
+  "params": [{
+    "name": "plat",
+    "select": {"type": "point", "fields": ["Platform"]},
+    "bind": {
+      "input": "select", 
+      "options": [null, "netflix", "hulu", "disney plus", "amazon prime"], 
+      "labels": ["Show All", "Netflix", "Hulu", "Disney Plus", "Amazon Prime"], 
+      "name": "Platform Selection: "}
+  }],  
+  "mark": {
+    "type": "bar"
+  },
+
+  "encoding": {
+    "x": {
+      "field": "Genre",
+      "type": "nominal",
+      "title": "Genre",
+      "axis": {"labelFontSize": 13, "titleFontSize": 15}
+    },
+    "y": {
+      "field": "Genre",
+      "aggregate": "count",
+      "title": "Number of Movies",
+      "axis": {"labelFontSize": 13, "titleFontSize": 15}
+    },
+    "color": {    
+      "condition":{
+        "param": "plat", 
+        "field": "Platform", 
+        "type": "nominal",
+        "legend": {
+          "labelFontSize": 13,
+          "titleFontSize": 15,
+          "orient": "top-right",
+          "fillColor": "white"
+        },
+        "scale": {
+          "domain": [
+            "disney plus",
+            "hulu",
+            "netflix",
+            "amazon prime"
+          ],
+          "range": [
+            "#060c41",
+            "#37e985",
+            "#e00018",
+            "#2da9e0"
+          ]
+        }
+      },
+      "value": "grey"
+    },
+    "tooltip": [
+      {"field": "Genre","aggregate": "count", "type": "quantitative", "title": "Number of Movies"},
+      {"field": "Genre", "type": "nominal"},
+      {"field": "Platform", "type": "nominal"}
+    ]
+  }
+}
